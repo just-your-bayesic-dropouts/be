@@ -7,13 +7,9 @@ def ingest_data(fn):
     :return: [ { Index } ]
     """
     dirty_data = []
-    clean_data = []
 
     with open(fn) as f:
         dirty_data = f.readlines()
 
     clean_data = [json.loads(line) for line in dirty_data]
-
     return clean_data
-
-    print('success')

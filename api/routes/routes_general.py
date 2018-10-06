@@ -21,17 +21,22 @@ es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 d = ingest_data("/Users/benkrig/Downloads/1000.json")
 index_data(d, es)
 
+
 @route_path_general.route('/search', methods=['GET'])
-def get_json():
+def search():
     try:
         # get query
         q = request.args.get('q')
-
-
-
+        logging.info(q)
         # request to elastic search
-        # r = requests.get('http://localhost:9200/'.format(q))
-        r = es.search(index="test_index", size=20, body={"query": {"prefix": {"url": 'https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/16-5/command_reference/b_165_9300_cr/b_165_9300_cr_chapter_01100.html'}}})
+        r = es.search(index="test_index", size=20, body={
+            "query": {
+                "query_string": {
+                    "default_field": "title",
+                    "query": q
+                }
+            }
+        })
 
         json_response = json.loads(json.dumps(r))
 
