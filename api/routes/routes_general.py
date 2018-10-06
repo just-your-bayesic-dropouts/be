@@ -25,7 +25,7 @@ def get_json():
         q = request.args.get('q')
 
         # request to elastic search
-        r = requests.get('http://localhost:9200')
+        r = requests.get('http://localhost:9200/{}'.format(q))
 
         json_response = r.content.decode('utf8').replace("'", '"')
 
