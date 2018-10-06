@@ -17,7 +17,3 @@ def ingest_data(fn):
     return clean_data
 
     print('success')
-
-
-if __name__ == "__main__":
-    ingest_data("/Users/benkrig/Downloads/1000.json")
