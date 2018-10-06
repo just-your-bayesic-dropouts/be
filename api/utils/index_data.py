@@ -8,4 +8,4 @@ def index_data(ingest, es):
         res = es.index(index="test_index", doc_type='product', id=i, body=d)
         print(res['result'])
         i += 1
-    es.indices.resfresh(index="test_index")
+    es.indices.refresh(index="test_index")
